@@ -97,6 +97,54 @@ def mul(A, B):
     return C
 
 
+def diag(x):
+    """
+    Creates diagonal matrix diag(x) for vector x.
+    :param x: real vector
+    :return: diagonal matrix D = diag(x)
+    """
+    n = len(x)
+    D = []
+    for i in range(n):
+        D.append([])
+        for j in range(n):
+            D[i].append(x[i] if i == j else 0.)
+    return D
+
+
+def eye(n):
+    """
+    Creates identity (unit) matrix I.
+    :param n: size of I
+    :return: identity matrix I of dimension n
+    """
+    return diag([1.] * n)
+
+
+def zero(n):
+    """
+    Creates zero (null) matrix Z.
+    :param n: size of Z
+    :return: null matrix Z of dimension n
+    """
+    return diag([0.] * n)
+
+
+def trace(A):
+    """
+    Implements trace operation trance(A).
+
+    :param A: real matrix of size n * n
+    :return: trace(A) = sum_i A[i][i]
+    """
+    if (len(A) != len(A[0])):
+        raise ValueError('calling trace(A) on non-square matrix A')
+    tr = 0.
+    for i in range(len(A)):
+        tr += A[i][i]
+    return tr
+
+
 if __name__ == '__main__':
     x = [1., 2., 3.]
     y = [2., 2., 1.]
@@ -121,3 +169,15 @@ if __name__ == '__main__':
 
     Z = sub(A, A)
     print('A-A', Z)
+
+    D = diag(x)
+    print('D = diag(x)', D)
+
+    td = trace(D)
+    print('trace(D)', td)
+
+    I = eye(4)
+    print('I = eye(4)', I)
+
+    Z4 = zero(4)
+    print('Z = zero(4)', Z4)

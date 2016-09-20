@@ -5,8 +5,8 @@ def dot(x, y):
     """
     Implements the dot product x * y.
 
-    :param x vector
-    :param y vector
+    :param x real vector
+    :param y real vector
     """
     if len(x) != len(y):
         raise ValueError('x and y have different dimension')
@@ -21,7 +21,7 @@ def transpose(A):
     """
     Implements matrix transposition A'.
 
-    :param A: matrix of size m * n
+    :param A: real matrix of size m * n
     :return: transposed matrix A' of size n * m
     """
     m, n = len(A), len(A[0])
@@ -33,12 +33,57 @@ def transpose(A):
     return B
 
 
+def add(A, B):
+    """
+    Implements matrix addition A + B.
+
+    :param A: real matrix of size m * n
+    :param B: real matrix of size m * n
+    :return: C = A + B
+    """
+    m, n = len(A), len(A[0])
+    C = []
+    for i in range(m):
+        C.append([])
+        for j in range(n):
+            C[i].append(A[i][j] + B[i][j])
+    return C
+
+
+def sub(A, B):
+    """
+    Implements matrix subtraction A - B.
+
+    :param A: real matrix of size m * n
+    :param B: real matrix of size m * n
+    :return: C = A - B
+    """
+    return add(A, smul(-1., B))
+
+
+def smul(s, A):
+    """
+    Implements scalar multiplication s * A.
+
+    :param s: real scalar
+    :param A: real matrix of size m * n
+    :return: B = s * A
+    """
+    m, n = len(A), len(A[0])
+    B = []
+    for i in range(m):
+        B.append([])
+        for j in range(n):
+            B[i].append(s * A[i][j])
+    return B
+
+
 def mul(A, B):
     """
     Implements matrix multiplication A * B.
 
-    :param A: matrix of size m * p
-    :param B: matrix of size p * n
+    :param A: real matrix of size m * p
+    :param B: real matrix of size p * n
     :return: C = A * B of dimensions m * n
     """
     m, p, n = len(A), len(A[0]), len(B[0])
@@ -60,8 +105,19 @@ if __name__ == '__main__':
     print(s)
 
     A = [x, y]
+    print('A', A)
+
     B = transpose(A)
-    print(B)
+    print('B = A^T', B)
 
     C = mul(A, B)
-    print(C)
+    print('A*B', C)
+
+    A2 = add(A, A)
+    print('A+A', A2)
+
+    A3 = smul(3., A)
+    print('3*A', A3)
+
+    Z = sub(A, A)
+    print('A-A', Z)

@@ -16,6 +16,18 @@ def factorial(n):
     return f
 
 
+def factorial_tailrec(n):
+    if n < 0:
+        raise ValueError('n! is undefined for n < 0')
+
+    def loop(n, acc):
+        if n <= 1:
+            return acc
+        return loop(n - 1, n * acc)
+
+    return loop(n, 1)
+
+
 def nchoosek(n, k):
     """
     Computes binomial coefficient C(n, k) = n! / (k! * (n - k)!).
@@ -34,6 +46,7 @@ if __name__ == '__main__':
 
     for n in range(5):
         print('{:d}! ='.format(n), factorial(n))
+        # print('{:d}! ='.format(n), factorial_tailrec(n))
 
     for n in range(5):
         for k in range(5):

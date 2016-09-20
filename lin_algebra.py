@@ -41,11 +41,20 @@ def mul(A, B):
     :param B: matrix of size p * n
     :return: C = A * B of dimensions m * n
     """
+    m, p, n = len(A), len(A[0]), len(B[0])
+    C = []
+    for i in range(m):
+        C.append([])
+        for j in range(n):
+            C[i].append(0.)
+            for k in range(p):
+                C[i][j] += A[i][k] * B[k][j]
+    return C
+
 
 if __name__ == '__main__':
-
-    x = [1, 2, 3]
-    y = [2, 2, 1]
+    x = [1., 2., 3.]
+    y = [2., 2., 1.]
 
     s = dot(x, y)
     print(s)
@@ -54,3 +63,5 @@ if __name__ == '__main__':
     B = transpose(A)
     print(B)
 
+    C = mul(A, B)
+    print(C)

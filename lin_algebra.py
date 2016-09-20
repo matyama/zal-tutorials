@@ -137,12 +137,17 @@ def trace(A):
     :param A: real matrix of size n * n
     :return: trace(A) = sum_i A[i][i]
     """
-    if (len(A) != len(A[0])):
+    if len(A) != len(A[0]):
         raise ValueError('calling trace(A) on non-square matrix A')
     tr = 0.
     for i in range(len(A)):
         tr += A[i][i]
     return tr
+
+
+def commutator(A, B):
+    # TODO: check A and B are square matrices
+    return sub(mul(A, B), mul(B, A))
 
 
 if __name__ == '__main__':
@@ -181,3 +186,5 @@ if __name__ == '__main__':
 
     Z4 = zero(4)
     print('Z = zero(4)', Z4)
+
+    print('commutator(I, I)', commutator(I, I))

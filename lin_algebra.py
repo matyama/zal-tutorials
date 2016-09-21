@@ -1,9 +1,74 @@
 #!/usr/bin/env python3
 
+from math import sqrt
+
+# TODO: check param dimensions
+
+def norm(x):
+    """
+    Implements euclidean norm of vector x. Euclidean norm ||x||_2 is defined as sqrt(sum_i x[i]^2)
+    :param x: real vector
+    :return: ||x||_2
+    """
+    s = 0.
+    for i in range(len(x)):
+        s += x[i] ** 2
+    return sqrt(s)
+
+
+def vadd(x, y):
+    """
+    Implements vector addition x+y defined as z[i] = x[i] + y[i] for all i.
+
+    :param x: real vector
+    :param y: real vector
+    :return: z = x + y
+    """
+    if len(x) != len(y):
+        raise ValueError('x and y must have same dimension')
+    z = []
+    for i in range(len(x)):
+        z.append(x[i] + y[i])
+    return z
+
+
+def vsub(x, y):
+    """
+    Implements vector subtraction x-y defined as z[i[ = x[i] - y[i] for all i.
+
+    :param x: real vector
+    :param y: real vector
+    :return: z = x - y
+    """
+    return vadd(x, svmul(-1., y))
+
+
+def svmul(s, x):
+    """
+    Implements multiplication by scalar s * x defined as y[i[ = s * x[i] for all i.
+
+    :param s: real scalar
+    :param x: real vector
+    :return: y = s * x
+    """
+    y = []
+    for i in range(len(x)):
+        y.append(s * x[i])
+    return y
+
+
+def normalize(x):
+    """
+    Create unit vector u corresponding to x, defined as u = x / norm(x).
+    :param x: real vector
+    :return: u = x / ||x||_2
+    """
+    return svmul(1. / norm(x), x)
+
 
 def dot(x, y):
     """
-    Implements the dot product x * y.
+    Implements the dot product x * y. Dot (scalar) product of two real vectors x and y is defined as sum_i x[i] * y[i].
 
     :param x real vector
     :param y real vector
@@ -11,15 +76,16 @@ def dot(x, y):
     if len(x) != len(y):
         raise ValueError('x and y have different dimension')
 
-    sum = 0.
+    s = 0.
     for i in range(len(x)):
-        sum += x[i] * y[i]
-    return sum
+        s += x[i] * y[i]
+    return s
 
 
 def transpose(A):
     """
     Implements matrix transposition A'.
+    Matrix B that is equal to transposition of matrix A is defined as B[j][i] = A[i][j] for all i and j.
 
     :param A: real matrix of size m * n
     :return: transposed matrix A' of size n * m
@@ -132,7 +198,7 @@ def zero(n):
 
 def trace(A):
     """
-    Implements trace operation trance(A).
+    Implements trace operation trance(A). Trace of a matrix is defined as the sum of elements on the main diagonal.
 
     :param A: real matrix of size n * n
     :return: trace(A) = sum_i A[i][i]
@@ -146,16 +212,32 @@ def trace(A):
 
 
 def commutator(A, B):
-    # TODO: check A and B are square matrices
     return sub(mul(A, B), mul(B, A))
 
 
 if __name__ == '__main__':
     x = [1., 2., 3.]
+    print('x =', x)
+    print('||x||_2 =', norm(x))
+
+    u = normalize(x)
+    print('u =', u)
+    print('||u||_2 =', norm(u))
+
     y = [2., 2., 1.]
+    print('y =', y)
+
+    z = vadd(x, y)
+    print('x+y =', z)
+
+    x3 = svmul(3., x)
+    print('3x =', x3)
+
+    null = vsub(y, y)
+    print('null =', null)
 
     s = dot(x, y)
-    print(s)
+    print('x * y =', s)
 
     A = [x, y]
     print('A', A)

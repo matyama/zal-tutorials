@@ -2,6 +2,7 @@
 
 from math import sqrt
 
+
 # TODO: check param dimensions
 
 def norm(x):
@@ -101,7 +102,7 @@ def transpose(A):
 
 def add(A, B):
     """
-    Implements matrix addition A + B.
+    Implements matrix addition A + B defined as C[i][j] = A[i][j] + B[i][j] for all i and j.
 
     :param A: real matrix of size m * n
     :param B: real matrix of size m * n
@@ -118,7 +119,7 @@ def add(A, B):
 
 def sub(A, B):
     """
-    Implements matrix subtraction A - B.
+    Implements matrix subtraction A - B defined as C[i][j] = A[i][j] - B[i][j] for all i and j.
 
     :param A: real matrix of size m * n
     :param B: real matrix of size m * n
@@ -129,7 +130,7 @@ def sub(A, B):
 
 def smul(s, A):
     """
-    Implements scalar multiplication s * A.
+    Implements scalar multiplication s * A defined as B[i][j] = s * A[i][j] for all i and j.
 
     :param s: real scalar
     :param A: real matrix of size m * n
@@ -146,7 +147,7 @@ def smul(s, A):
 
 def mul(A, B):
     """
-    Implements matrix multiplication A * B.
+    Implements matrix multiplication A * B defined as C[i][j] = sum_k A[i][k] * B[k][j] for all i and j.
 
     :param A: real matrix of size m * p
     :param B: real matrix of size p * n
@@ -165,7 +166,8 @@ def mul(A, B):
 
 def diag(x):
     """
-    Creates diagonal matrix diag(x) for vector x.
+    Creates diagonal matrix D = diag(x) for vector x defined as D[i][i] = x[i] for all i, otherwise 0.
+
     :param x: real vector
     :return: diagonal matrix D = diag(x)
     """
@@ -180,7 +182,7 @@ def diag(x):
 
 def eye(n):
     """
-    Creates identity (unit) matrix I.
+    Creates identity (unit) matrix I defined as I[i][i] = 1 for all i, I[i][j] = 0 for all j != i.
     :param n: size of I
     :return: identity matrix I of dimension n
     """
@@ -189,7 +191,7 @@ def eye(n):
 
 def zero(n):
     """
-    Creates zero (null) matrix Z.
+    Creates zero (null) matrix Z defined as Z[i][j] = 0 for all i and j.
     :param n: size of Z
     :return: null matrix Z of dimension n
     """
@@ -212,6 +214,13 @@ def trace(A):
 
 
 def commutator(A, B):
+    """
+    Implements comutator C of matrices A and B defined as C = A * B - B * A.
+
+    :param A: real matrix
+    :param B: real matrix
+    :return: C = A * B - B * A
+    """
     return sub(mul(A, B), mul(B, A))
 
 

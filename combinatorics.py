@@ -16,14 +16,34 @@ def factorial(n):
     return f
 
 
+def factorial_rec(n):
+    """
+    Computes factorial of n. This implementation uses recursion.
+
+    :param n: non-negative integer
+    :return: n!
+    """
+    if n < 0:
+        raise ValueError('n! is undefined for n < 0')
+
+    def rec(n):
+        return 1 if n <= 1 else n * rec(n - 1)
+
+    return rec(n)
+
+
 def factorial_tailrec(n):
+    """
+    Computes factorial of n. This implementation uses tail-recursion (i.e. recursive call is the last call in the body).
+
+    :param n: non-negative integer
+    :return: n!
+    """
     if n < 0:
         raise ValueError('n! is undefined for n < 0')
 
     def loop(n, acc):
-        if n <= 1:
-            return acc
-        return loop(n - 1, n * acc)
+        return acc if n <= 1 else loop(n - 1, n * acc)
 
     return loop(n, 1)
 
@@ -44,10 +64,13 @@ def nchoosek(n, k):
 
 if __name__ == '__main__':
 
+    # test factorial
     for n in range(5):
-        print('{:d}! ='.format(n), factorial(n))
-        # print('{:d}! ='.format(n), factorial_tailrec(n))
+        print('{:d}! = {:d} (iter)'.format(n, factorial(n)))
+        print('{:d}! = {:d} (rec)'.format(n, factorial_rec(n)))
+        print('{:d}! = {:d} (tail-rec)'.format(n, factorial_tailrec(n)))
 
+    # test binomial coefficient
     for n in range(5):
         for k in range(5):
             print('C({:d}, {:d}) ='.format(n, k), nchoosek(n, k))

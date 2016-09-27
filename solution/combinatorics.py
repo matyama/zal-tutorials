@@ -8,7 +8,12 @@ def factorial(n):
     :param n: non-negative integer
     :return: n!
     """
-    pass
+    if n < 0:
+        raise ValueError('n! is undefined for n < 0')
+    f = 1
+    for i in range(n, 1, -1):
+        f *= i
+    return f
 
 
 def factorial_rec(n):
@@ -18,7 +23,13 @@ def factorial_rec(n):
     :param n: non-negative integer
     :return: n!
     """
-    pass
+    if n < 0:
+        raise ValueError('n! is undefined for n < 0')
+
+    def rec(n):
+        return 1 if n <= 1 else n * rec(n - 1)
+
+    return rec(n)
 
 
 def factorial_tailrec(n):
@@ -28,7 +39,13 @@ def factorial_tailrec(n):
     :param n: non-negative integer
     :return: n!
     """
-    pass
+    if n < 0:
+        raise ValueError('n! is undefined for n < 0')
+
+    def loop(n, acc):
+        return acc if n <= 1 else loop(n - 1, n * acc)
+
+    return loop(n, 1)
 
 
 def nchoosek(n, k):
@@ -39,7 +56,10 @@ def nchoosek(n, k):
     :param k: number of items chosen
     :return: C(n, k)
     """
-    pass
+    c = 1
+    for l in range(k):
+        c *= (n - l) / (k - l)
+    return int(c)
 
 
 if __name__ == '__main__':

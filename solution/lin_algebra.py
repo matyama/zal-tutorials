@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+from math import sqrt
+
+
+# TODO: check param dimensions
 
 def norm(x):
     """
@@ -7,7 +11,10 @@ def norm(x):
     :param x: real vector
     :return: ||x||_2
     """
-    pass
+    s = 0.
+    for i in range(len(x)):
+        s += x[i] ** 2
+    return sqrt(s)
 
 
 def vadd(x, y):
@@ -18,7 +25,12 @@ def vadd(x, y):
     :param y: real vector
     :return: z = x + y
     """
-    pass
+    if len(x) != len(y):
+        raise ValueError('x and y must have same dimension')
+    z = []
+    for i in range(len(x)):
+        z.append(x[i] + y[i])
+    return z
 
 
 def vsub(x, y):
@@ -29,7 +41,7 @@ def vsub(x, y):
     :param y: real vector
     :return: z = x - y
     """
-    pass
+    return vadd(x, svmul(-1., y))
 
 
 def svmul(s, x):
@@ -40,7 +52,10 @@ def svmul(s, x):
     :param x: real vector
     :return: y = s * x
     """
-    pass
+    y = []
+    for i in range(len(x)):
+        y.append(s * x[i])
+    return y
 
 
 def normalize(x):
@@ -49,7 +64,7 @@ def normalize(x):
     :param x: real vector
     :return: u = x / ||x||_2
     """
-    pass
+    return svmul(1. / norm(x), x)
 
 
 def dot(x, y):
@@ -59,7 +74,13 @@ def dot(x, y):
     :param x real vector
     :param y real vector
     """
-    pass
+    if len(x) != len(y):
+        raise ValueError('x and y have different dimension')
+
+    s = 0.
+    for i in range(len(x)):
+        s += x[i] * y[i]
+    return s
 
 
 def transpose(A):
@@ -70,7 +91,13 @@ def transpose(A):
     :param A: real matrix of size m * n
     :return: transposed matrix A' of size n * m
     """
-    pass
+    m, n = len(A), len(A[0])
+    B = []
+    for j in range(n):
+        B.append([])
+        for i in range(m):
+            B[j].append(A[i][j])
+    return B
 
 
 def add(A, B):
@@ -81,7 +108,13 @@ def add(A, B):
     :param B: real matrix of size m * n
     :return: C = A + B
     """
-    pass
+    m, n = len(A), len(A[0])
+    C = []
+    for i in range(m):
+        C.append([])
+        for j in range(n):
+            C[i].append(A[i][j] + B[i][j])
+    return C
 
 
 def sub(A, B):
@@ -92,7 +125,7 @@ def sub(A, B):
     :param B: real matrix of size m * n
     :return: C = A - B
     """
-    pass
+    return add(A, smul(-1., B))
 
 
 def smul(s, A):
@@ -103,7 +136,13 @@ def smul(s, A):
     :param A: real matrix of size m * n
     :return: B = s * A
     """
-    pass
+    m, n = len(A), len(A[0])
+    B = []
+    for i in range(m):
+        B.append([])
+        for j in range(n):
+            B[i].append(s * A[i][j])
+    return B
 
 
 def mul(A, B):
@@ -114,7 +153,15 @@ def mul(A, B):
     :param B: real matrix of size p * n
     :return: C = A * B of dimensions m * n
     """
-    pass
+    m, p, n = len(A), len(A[0]), len(B[0])
+    C = []
+    for i in range(m):
+        C.append([])
+        for j in range(n):
+            C[i].append(0.)
+            for k in range(p):
+                C[i][j] += A[i][k] * B[k][j]
+    return C
 
 
 def diag(x):
@@ -124,7 +171,13 @@ def diag(x):
     :param x: real vector
     :return: diagonal matrix D = diag(x)
     """
-    pass
+    n = len(x)
+    D = []
+    for i in range(n):
+        D.append([])
+        for j in range(n):
+            D[i].append(x[i] if i == j else 0.)
+    return D
 
 
 def eye(n):
@@ -133,7 +186,7 @@ def eye(n):
     :param n: size of I
     :return: identity matrix I of dimension n
     """
-    pass
+    return diag([1.] * n)
 
 
 def zero(n):
@@ -142,7 +195,7 @@ def zero(n):
     :param n: size of Z
     :return: null matrix Z of dimension n
     """
-    pass
+    return diag([0.] * n)
 
 
 def trace(A):
@@ -152,7 +205,12 @@ def trace(A):
     :param A: real matrix of size n * n
     :return: trace(A) = sum_i A[i][i]
     """
-    pass
+    if len(A) != len(A[0]):
+        raise ValueError('calling trace(A) on non-square matrix A')
+    tr = 0.
+    for i in range(len(A)):
+        tr += A[i][i]
+    return tr
 
 
 def commutator(A, B):
@@ -163,7 +221,7 @@ def commutator(A, B):
     :param B: real matrix
     :return: C = A * B - B * A
     """
-    pass
+    return sub(mul(A, B), mul(B, A))
 
 
 if __name__ == '__main__':

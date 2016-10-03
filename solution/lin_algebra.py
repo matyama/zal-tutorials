@@ -35,7 +35,7 @@ def vadd(x, y):
 
 def vsub(x, y):
     """
-    Implements vector subtraction x-y defined as z[i[ = x[i] - y[i] for all i.
+    Implements vector subtraction x-y defined as z[i] = x[i] - y[i] for all i.
 
     :param x: real vector
     :param y: real vector
@@ -46,7 +46,7 @@ def vsub(x, y):
 
 def svmul(s, x):
     """
-    Implements multiplication by scalar s * x defined as y[i[ = s * x[i] for all i.
+    Implements multiplication by scalar s * x defined as y[i] = s * x[i] for all i.
 
     :param s: real scalar
     :param x: real vector

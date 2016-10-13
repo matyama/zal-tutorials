@@ -7,5 +7,5 @@ if __name__ == '__main__':
 
     # What if there is less/more than 2 arguments?
 
-    # Today we use sys.stdout.write() instead of print(), notice the newline character '\n'.
+    # In this exercise we use sys.stdout.write() instead of print(), notice the newline character '\n'.
     sys.stdout.write('output\n')

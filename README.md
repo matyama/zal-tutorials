@@ -16,4 +16,7 @@ Recommended implementation order:
 4. functional
 5. combinatorics
 6. union_find
-7. java
+7. graph
+8. euler_trail
+9. mst
+10. java

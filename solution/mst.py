@@ -20,7 +20,7 @@ def kruskal_mst(graph):
     for u, v in sorted(graph.edges(), key=lambda _: graph.weight(*_)):
         if not ds.find(u, v):
             ds.union(u, v)
-            mst.add_edge(u, v)
+            mst.add_edge(u, v, graph.weight(u, v))
             if len(mst.edges()) == num_nodes - 1:
                 return mst
 

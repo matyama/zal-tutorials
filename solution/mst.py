@@ -17,7 +17,7 @@ def kruskal_mst(graph):
     mst = Graph()
     ds = UnionFind(num_nodes)
 
-    for u, v in sorted(graph.edges(), key=lambda _: graph.weight(*_)):
+    for u, v in sorted(graph.edges(), key=graph.edge_weight):
         if not ds.find(u, v):
             ds.union(u, v)
             mst.add_edge(u, v, graph.weight(u, v))

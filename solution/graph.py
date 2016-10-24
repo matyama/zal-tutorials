@@ -63,6 +63,9 @@ class Graph(object):
         self._check_edge(u, v)
         return self._graph[u][v]
 
+    def edge_weight(self, edge):
+        return self.weight(*edge if len(edge) == 2 else (edge[0], edge[1]))
+
     def __str__(self):
         return self._graph.__str__()
 

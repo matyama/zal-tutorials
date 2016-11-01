@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from solution.graph import Graph
-from solution.union_find import UnionFind
+from graph import Graph
+from union_find import UnionFind
 
 
 def kruskal_mst(graph):
@@ -30,20 +30,7 @@ def kruskal_mst(graph):
     :param graph: weighted connected simple undirected graph as instance of Graph
     :return: minimum spanning tree as instance of Graph
     """
-
-    num_nodes = len(graph.nodes())
-
-    mst = Graph()
-    ds = UnionFind(num_nodes)
-
-    for u, v in sorted(graph.edges(), key=graph.edge_weight):
-        if not ds.find(u, v):
-            ds.union(u, v)
-            mst.add_edge(u, v, graph.weight(u, v))
-            if len(mst.edges()) == num_nodes - 1:
-                return mst
-
-    return mst
+    pass
 
 
 if __name__ == '__main__':

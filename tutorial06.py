@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from solution.tutorial05 import randoms
+from tutorial05 import randoms
 
 
 def swap(array, i, j):

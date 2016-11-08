@@ -86,6 +86,9 @@ if __name__ == '__main__':
     swap(a1, 2, 6)
     print(a1)
 
+    # test min_idx
+    print(min_idx(a1, 2))
+
     # test insertion sort
     insertion_sort(a1)
     print(a1)

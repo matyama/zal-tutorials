@@ -6,7 +6,6 @@ class Node:
         self.data = data
         self.next_node = next_node
         self.prev_node = prev_node
-        self.size = 0
 
     def __str__(self):
         return str(self.data)
@@ -59,14 +58,12 @@ class Queue:
 
         :return: `list` of data elements in this queue
         """
-        return self.map_data(lambda x: x)
-
-    def map_data(self, f=lambda x: x):
         n = self.head
+        l = []
         while n:
-            # yield returns given expression as one item in a generator sequence
-            yield f(n.data)
+            l.append(n.data)
             n = n.next_node
+        return l
 
     def __len__(self):
         return self.size
@@ -75,7 +72,7 @@ class Queue:
         return self.head is not None
 
     def __str__(self):
-        return '[' + ', '.join(self.map_data(str)) + ']'
+        return str(self.list())
 
     def __repr__(self):
         return str(self)
@@ -121,14 +118,12 @@ class Stack:
 
         :return: `list` of data elements in this stack
         """
-        return self.map_data(lambda x: x)
-
-    def map_data(self, f):
         n = self.top
+        l = []
         while n:
-            # yield returns given expression as one item in a generator sequence
-            yield f(n.data)
+            l.append(n.data)
             n = n.next_node
+        return l
 
     def __len__(self):
         return self.size
@@ -137,7 +132,7 @@ class Stack:
         return self.top is not None
 
     def __str__(self):
-        return '[' + ', '.join(self.map_data(str)) + ']'
+        return str(self.list())
 
     def __repr__(self):
         return str(self)

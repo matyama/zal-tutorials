@@ -3,19 +3,36 @@
 
 class Graph(object):
     """
-    TODO: docstring
+    Class representing an (weighted) undirected simple graph.
     """
 
     def __init__(self, edges=set()):
+        """
+        Construct this graph from given (possibly empty) `set` of `edges`.
+
+        :param edges: `set` edges represented as tuples of vertices and optionally a weight
+        """
         self._graph = dict()
         self._edges = set()
         self.add_edges(edges)
 
     def add_edge(self, u, v, weight=1.):
+        """
+        Add an undirected edge `{u, v}`, optionally with `weight`.
+
+        :param u: first vertex/node
+        :param v: second vertex/node
+        :param weight: real number representing the weight/cost of added edge
+        """
         self._add_adj(u, v, weight)
         self._add_adj(v, u, weight)
 
     def add_edges(self, edges=set()):
+        """
+        Add a `set` of `edges` to this graph. Edges are given as tuples of nodes.
+
+        :param edges: `set` of tuples representing the edges
+        """
         for e in edges:
             self.add_edge(*e)
 
@@ -39,6 +56,12 @@ class Graph(object):
         self._check_adj(u, v)
 
     def remove_edge(self, u, v):
+        """
+        Remove edge `{u, v}` from this graph.
+
+        :param u: first vertex/node of the removed edge
+        :param v: second vertex/node of the removed edge
+        """
         self._check_edge(u, v)
         del self._graph[u][v]
         del self._graph[v][u]
@@ -46,24 +69,59 @@ class Graph(object):
         self._edges.discard((v, u))
 
     def nodes(self):
+        """
+        Returns a view on vertices/nodes in this graph.
+
+        :return: `iterable` collection of vertices/nodes
+        """
         return self._graph.keys()
 
     def adj(self, u):
+        """
+        Returns a view on adjacent vertices/nodes of given vertex `u`.
+
+        :param u: vertex for which the adjacent vertices are returned
+        :return: `iterable` collection of neighbors of `u`
+        """
         self._check_node(u)
         return self._graph[u].keys()
 
     def deg(self, u):
+        """
+        Returns a degree of given vertex `u`.
+
+        :param u: queried vertex
+        :return: `deg(u)`
+        """
         self._check_node(u)
         return len(self.adj(u))
 
     def edges(self):
+        """
+        Returns a `set` of edges in this graph.
+
+        :return: `set` of edges as tuples of vertices
+        """
         return self._edges
 
     def weight(self, u, v):
+        """
+        Return a weiht of edge `{u, v}`.
+
+        :param u: first vertex/node of the edge
+        :param v: second vertex/node of the edge
+        :return: weight `w({u, v})`
+        """
         self._check_edge(u, v)
         return self._graph[u][v]
 
     def edge_weight(self, edge):
+        """
+        Return a weiht of given `edge` represented as tuple of vertices.
+
+        :param edge: edge as tuple of two vertices
+        :return: weight `w(edge)`
+        """
         return self.weight(*edge if len(edge) == 2 else (edge[0], edge[1]))
 
     def __str__(self):

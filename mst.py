@@ -3,6 +3,8 @@
 from graph import Graph
 from union_find import UnionFind
 
+from utils.prim_mst_heap import heapify, pop, update, key
+
 
 def kruskal_mst(graph):
     """
@@ -33,6 +35,20 @@ def kruskal_mst(graph):
     pass
 
 
+def prim_mst(graph):
+    """
+    Implement Jarnik-Prim's algorithm for finding the minimum spanning tree (minimalni kostra grafu). Given a weighted
+    connected simple undirected graph G, a spanning tree is a factor of G (sub-graph which has all vertices of G)
+    which is a tree. The weight/cost of a spanning tree is the sum of weights/costs of all it's edges.
+
+    For implementation see https://en.wikipedia.org/wiki/Prim's_algorithm.
+
+    :param graph: weighted connected simple undirected graph as instance of Graph
+    :return: minimum spanning tree as instance of Graph
+    """
+    pass
+
+
 if __name__ == '__main__':
     E = {(0, 1, 2), (0, 2, 2), (0, 3, 3), (1, 2, 1),
          (1, 3, 2), (1, 4, 3), (2, 3, 1), (2, 4, 2)}
@@ -41,6 +57,11 @@ if __name__ == '__main__':
     print(G)
 
     K = kruskal_mst(G)
+    w = sum(K.edge_weight(e) for e in K.edges())
+    print('K =', K)
+    print('w(K) =', w)
+
+    K = prim_mst(G)
     w = sum(K.edge_weight(e) for e in K.edges())
     print('K =', K)
     print('w(K) =', w)

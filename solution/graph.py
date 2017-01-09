@@ -128,8 +128,34 @@ class Graph(object):
         return self._graph.__str__()
 
     def __repr__(self):
-        return self._graph.__repr__()
+        return str(self)
 
+
+class Digraph(Graph):
+    """
+    Class representing an (weighted) directed simple graph.
+    """
+
+    def add_edge(self, u, v, weight=1.):
+        self._add_adj(u, v, weight)
+
+    def _add_adj(self, node, adj, weight):
+        if node not in self._graph:
+            self._graph[node] = dict()
+        self._graph[node][adj] = weight
+        if (node, adj) not in self._edges:
+            self._edges.add((node, adj))
+
+    def remove_edge(self, u, v):
+        """
+        Remove edge `(u, v)` from this graph.
+
+        :param u: first vertex/node of the removed edge
+        :param v: second vertex/node of the removed edge
+        """
+        self._check_edge(u, v)
+        del self._graph[u][v]
+        self._edges.discard((u, v))
 
 if __name__ == '__main__':
 

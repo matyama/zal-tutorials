@@ -101,6 +101,26 @@ class Graph(object):
         pass
 
 
+class Digraph(Graph):
+    """
+    Class representing an (weighted) directed simple graph.
+    """
+
+    def add_edge(self, u, v, weight=1.):
+        pass
+
+    def _add_adj(self, node, adj, weight):
+        pass
+
+    def remove_edge(self, u, v):
+        """
+        Remove edge `(u, v)` from this graph.
+
+        :param u: first vertex/node of the removed edge
+        :param v: second vertex/node of the removed edge
+        """
+        pass
+
 if __name__ == '__main__':
 
     E = {(0, 1), (0, 2), (1, 3), (1, 4), (2, 5)}

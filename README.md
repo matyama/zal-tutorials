@@ -19,4 +19,5 @@ Recommended implementation order:
 7. graph
 8. euler_trail
 9. mst
-10. java
+10. scc
+11. java

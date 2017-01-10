@@ -22,7 +22,8 @@ class Node:
 
 def tarjan_scc(digraph):
     """
-    Find all strongly connected conponenets of given `digraph`.
+    Find all strongly connected components of given `digraph`. Use Tarjan's algorithm.
+    For implementation see e.g. http://cw.fel.cvut.cz/wiki/_media/courses/a4m33pal/2012pal03.pdf.
 
     :param digraph: directed graph as instance of `Digraph`
     :return: `list` of `set`s representing strongly connected components of `graph`
